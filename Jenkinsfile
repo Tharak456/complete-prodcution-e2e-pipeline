@@ -2,8 +2,8 @@ pipeline{
     agent any
     tools {
    #    jdk 'Java17'
-        maven 'Maven'
-    }
+        maven 'Maven3'
+          }
     environment {
         APP_NAME = "complete-prodcution-e2e-pipeline"
         RELEASE = "1.0.0"
@@ -13,35 +13,35 @@ pipeline{
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
 
-    }
+                 }
     stages{
         stage("Cleanup Workspace"){
             steps {
                 cleanWs()
-            }
+                  }
 
-        }
+                                  }
     
         stage("Checkout from SCM"){
             steps {
-                git branch: 'CICD', credentialsId: 'GITHUBCredentials', url: 'https://github.com/dmancloud/complete-prodcution-e2e-pipeline'
-            }
+                git branch: 'CICD', credentialsId: 'GITHUB', url: 'https://github.com/dmancloud/complete-prodcution-e2e-pipeline'
+                  }
 
-        }
+                                  }
 
         stage("Build Application"){
             steps {
                 sh "mvn clean package"
-            }
+                  }
 
-        }
+                                  }
 
         stage("Test Application"){
             steps {
                 sh "mvn test"
-            }
+                  }
 
-        }
+                                  }
 
         
     }
