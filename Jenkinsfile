@@ -38,8 +38,9 @@ pipeline{
                     withSonarQubeEnv(credentialsId: 'Sonarqube-Token') {
                         sh "mvn sonar:sonar"
                   }
-
-                                  }
+                       }
+                           } 
+        }
 
         
     }
