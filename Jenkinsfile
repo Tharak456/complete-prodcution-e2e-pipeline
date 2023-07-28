@@ -5,9 +5,9 @@ pipeline{
         maven 'Maven3'
           }
     environment {
-        DOCKER_USER = "2356176"
+        DOCKER_USER = '2356176'
         DOCKER_PASS = 'dockerhub'
-        IMAGE_NAME = "testimage"
+        IMAGE_NAME = 'testimage'
     }
     stages{
         stage("Cleanup Workspace"){
