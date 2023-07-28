@@ -7,6 +7,7 @@ pipeline{
     environment {
         DOCKER_USER = "2356176"
         DOCKER_PASS = 'dockerhub'
+    }
     stages{
         stage("Cleanup Workspace"){
             steps {
