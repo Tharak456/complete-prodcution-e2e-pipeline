@@ -4,6 +4,9 @@ pipeline{
         jdk 'Java17'
         maven 'Maven3'
           }
+    environment {
+        DOCKER_USER = "2356176"
+        DOCKER_PASS = 'dockerhub'
     stages{
         stage("Cleanup Workspace"){
             steps {
