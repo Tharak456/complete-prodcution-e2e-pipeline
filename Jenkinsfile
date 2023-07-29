@@ -67,7 +67,7 @@ pipeline{
             steps {
                 script {
                     withAWS(credentials: 'AWS-Credentials') {
-                       kubectl config view
+                       sh 'aws version'
                     }
                 }
             }
