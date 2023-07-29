@@ -8,6 +8,7 @@ pipeline{
         DOCKER_USER = '2356176'
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "test"
+        DOCKER_PASS = 'dockerhub'
     }
     stages{
         stage("Cleanup Workspace"){
@@ -51,7 +52,7 @@ pipeline{
                 script {
                         docker_image = docker.build "${IMAGE_NAME}"
                 }
-                docker.withRegistry(credentialsId: 'DOCKER_PASS') {
+                docker.withRegistry('',DOCKER_PASS) {
                         docker_image.push("${IMAGE_NAME}")
                     }
             }
