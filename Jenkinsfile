@@ -66,9 +66,9 @@ pipeline{
         stage("Deploy") {
             steps {
                 script {
-                    withAWS(credentials: 'AWS-Credentials', endpointUrl: 'https://68D32B1E466F6F6EEC3F734DE5152A90.sk1.us-east-2.eks.amazonaws.com') {
+                    withAWS(credentials: 'AWS-Credentials') {
                        kubectl config view
-}
+                    }
                 }
             }
         }
