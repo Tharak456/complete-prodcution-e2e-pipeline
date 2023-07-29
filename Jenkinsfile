@@ -6,7 +6,6 @@ pipeline{
           }
     environment {
         DOCKER_USER = '2356176'
-        DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "test"
     }
     stages{
@@ -49,10 +48,10 @@ pipeline{
         stage("Build & Push Docker Image") {
             steps {
                 script {
-                    docker.withRegistry('',DOCKER_PASS) {
+                    withDockerRegistry(credentialsId: 'DOCKER_PASS') {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
-                    docker.withRegistry('',DOCKER_PASS) {
+                    withDockerRegistry(credentialsId: 'DOCKER_PASS') {
                         docker_image.push("${IMAGE_NAME}")
                     }
             }
