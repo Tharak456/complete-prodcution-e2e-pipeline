@@ -8,7 +8,6 @@ pipeline{
         DOCKER_USER = '2356176'
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "test"
-        DOCKER_PASS = 'dockerhub'
     }
     stages{
         stage("Cleanup Workspace"){
