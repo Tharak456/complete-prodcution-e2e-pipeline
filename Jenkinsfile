@@ -5,8 +5,10 @@ pipeline{
         maven 'Maven3'
           }
     environment {
+        RELEASE = "1.0.0"
         DOCKER_USER = '2356176'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "test"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     }
     stages{
         stage("Cleanup Workspace"){
@@ -52,7 +54,7 @@ pipeline{
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
                     withDockerRegistry(credentialsId: 'DOCKER_PASS') {
-                        docker_image.push("${IMAGE_NAME}")
+                        docker_image.push("${IMAGE_TAG}")
                     }
             }
 
