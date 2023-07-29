@@ -67,7 +67,7 @@ pipeline{
             steps {
                 script {
                     withAWS(credentials: 'AWS-Credentials') {
-                       sh 'aws version'
+                       sh 'aws ec2 describe-instances'
                     }
                 }
             }
