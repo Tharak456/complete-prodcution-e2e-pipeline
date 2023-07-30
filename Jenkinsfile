@@ -69,7 +69,7 @@ pipeline{
                     withAWS(credentials: 'AWS-Credentials') {
                        sh 'aws ec2 describe-instances'
                     }
-                    withKubeConfig(caCertificate: '', clusterName: 'EKS-DEV', contextName: 'arn:aws:eks:us-east-2:114100840324:cluster/EKS-DEV', credentialsId: 'k8sconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://68D32B1E466F6F6EEC3F734DE5152A90.sk1.us-east-2.eks.amazonaws.com') {
+                    withKubeConfig(credentials: 'AWS-Credentials', clusterName: 'EKS-DEV', contextName: 'arn:aws:eks:us-east-2:114100840324:cluster/EKS-DEV', credentialsId: 'k8sconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://68D32B1E466F6F6EEC3F734DE5152A90.sk1.us-east-2.eks.amazonaws.com') {
                          sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                          sh 'chmod u+x ./kubectl'  
                          sh './kubectl get nodes'
