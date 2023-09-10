@@ -5,39 +5,20 @@ pipeline{
         maven 'Maven3'
           }
     stages{
-        stage("Cleanup Workspace"){
-            steps {
-                cleanWs()
-                  }
-
-                                  }
-    
-        stage("Checkout from SCM"){
-            steps {
-                git branch: 'CICD', credentialsId: 'GITHUB', url: 'https://github.com/Tharak456/complete-prodcution-e2e-pipeline.git'
-                  }
-
-        }
-        stage("Build Application"){
-            steps {
-                sh "mvn clean package"
-                  }
-
-        }
-
-        stage("Test Application"){
-            steps {
-                sh "mvn test"
-                  }
-        }
-        stage("code analysis using sonarqube"){
+         stage("Deploy") {
             steps {
                 script {
-                    withSonarQubeEnv(credentialsId: 'Sonarqubetoken') {
-                        sh "mvn sonar:sonar"
-                  }
-                       }
-                           } 
+                    withAWS(credentials: 'AWS-Credentials') {
+                       sh 'aws ec2 describe-instances'
+                    
+                    withKubeConfig(clusterName: 'EKS-DEV', contextName: 'arn:aws:eks:us-east-2:855326247041:cluster/EKS-DEV', credentialsId: 'k8sconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://CD4331F2B06F91536EEE778E45EBB862.gr7.us-east-2.eks.amazonaws.com') {
+                         sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
+                         sh 'chmod u+x ./kubectl'  
+                         sh './kubectl get nodes'
+                    }
+                 }
+                }
+            }
         }
 }
 }
